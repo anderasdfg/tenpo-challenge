@@ -1,6 +1,7 @@
 import { Outlet, NavLink } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { APP_NAME, COMPANY_NAME, MENU_ITEMS } from '@/config/app.config';
+import ScrollToTop from '@/components/ui/ScrollToTop';
 
 const PrivateLayout = () => {
     const { logout } = useAuth();
@@ -11,7 +12,7 @@ const PrivateLayout = () => {
 
     return (
         <div className="flex flex-col min-h-screen bg-blue-900">
-            <header className="bg-yellow-400 border-b border-gray-200 shadow-sm">
+            <header className="fixed top-0 left-0 right-0 bg-yellow-400 border-b border-gray-200 shadow-sm z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
                         <h1 className="text-xl font-bold text-blue-900">{APP_NAME}</h1>
@@ -40,9 +41,7 @@ const PrivateLayout = () => {
                         <div className="flex items-center">
                             <button
                                 onClick={logout}
-
                                 className="w-full bg-red-600 hover:bg-red-700 px-4 py-2 text-sm font-medium text-white rounded transition disabled:bg-yellow-200 border-b-4 border-yellow-700 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-
                             >
                                 Logout
                             </button>
@@ -51,7 +50,7 @@ const PrivateLayout = () => {
                 </div>
             </header>
 
-            <main className="flex-grow py-6">
+            <main className="flex-grow py-6 mt-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <Outlet />
                 </div>
@@ -62,6 +61,8 @@ const PrivateLayout = () => {
                     <p className="text-sm text-gray-500">&copy; {new Date().getFullYear()} {COMPANY_NAME}</p>
                 </div>
             </footer>
+
+            <ScrollToTop threshold={400} />
         </div>
     );
 };
